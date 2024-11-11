@@ -28,12 +28,12 @@ public abstract class accounts {
     }
 
     public void setPin(int pin) {
-        this.pin = pin;
+        this.pin = pin; //lalagyan ng if else sa main
     }
 
     public void setYoB(int yob){
         if(2024 - yob < 18){
-            System.out.println("You must be 18 years or older to open an account.");
+            System.out.println("You must be 18 years or older to open an account."); //ito pwede sa main na ilagay
         }
         else{
             this.YoB = yob;
@@ -42,7 +42,7 @@ public abstract class accounts {
 
     public void setInitialDepo(int initialDepo) {
         if(initialDepo < 3000){
-            System.out.println("Initial deposit must be greater than 3000.");
+            System.out.println("Initial deposit must be greater than 3000.");//ito din sa main nalang
         }
         else{
             this.initialDepo = initialDepo;

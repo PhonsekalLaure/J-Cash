@@ -13,7 +13,7 @@ public class savings extends accounts{
         for(int i = 0; i < 10; i++){
             balance += balance * this.interest;
         }
-        System.out.println("The balance after 10 years with an interest rate of 6.25% is: " + balance);
+        System.out.println("The balance after 10 years with an interest rate of 6.25% is: " + balance); //gagawing printf
     }
 
     @Override
