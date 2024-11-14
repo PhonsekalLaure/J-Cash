@@ -106,9 +106,5 @@ public abstract class accounts {
         }
     }
 
-    public int getPin(){
-        return this.pin;
-    }
-
     public abstract void withdraw(int amount);
 }
