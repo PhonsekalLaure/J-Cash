@@ -6,7 +6,6 @@ public abstract class accounts {
     private String name;    //name of the account holder
     private int pin;    //write only 4 digit pin
     private int YoB;    // year of birth
-    private int initialDepo;    //initial deposit for account creation
     private int balance;    //current balance in the account
     
     Scanner input = new Scanner(System.in);
@@ -15,7 +14,6 @@ public abstract class accounts {
         name = " ";
         pin = 0;
         accountNo = 0;
-        initialDepo = 0;
         YoB = 0;
     }
 
@@ -60,11 +58,11 @@ public abstract class accounts {
         while(true){
             if(initialDepo <= 2999){
                 System.out.println("Initial deposit must be at least PHP 3000.");
-                System.out.print("Enter Initial Deposit: ");
+                System.out.print("Enter Initial Deposit: \t");
                 initialDepo = input.nextInt();
             }
             else{
-                this.initialDepo = initialDepo;
+                this.balance = initialDepo;
                 break;
             }
         }
@@ -86,30 +84,18 @@ public abstract class accounts {
         return 2024 - this.YoB;
     }
 
-    public int getInitialDepo(){
-        return this.initialDepo;
-    }
-
     public int getBalance(){
         return this.balance;
     }
 
     public void deposit(int amount){
-        boolean firstDepo = false;
-        if(!firstDepo){
-            this.balance += amount + this.initialDepo;
-            firstDepo = true;
-        }
-        else{
             this.balance += amount;
-        }
     }
 
     public void getDetails(){
         System.out.println("Account Number: " + this.getAccountNo());
         System.out.println("Name: " + this.getName());
         System.out.println("Age: " + this.getAge());
-        System.out.println("Initial Deposit: " + this.getInitialDepo());
         System.out.println("Balance: " + this.getBalance());
     }
 
