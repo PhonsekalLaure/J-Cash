@@ -99,11 +99,20 @@ public abstract class accounts {
         System.out.println("Balance: " + this.getBalance());
     }
 
-    public static void Display(accounts[] Account){
-        for(accounts acc: Account){
-            System.out.println("Account Number: " + acc.getAccountNo());
-            System.out.println();
+    public boolean verify(int pin){
+        int attempts = 0;
+        while (attempts < 3){
+            if(this.pin == pin){
+                return true;
+            }
+            else{
+                System.out.println("INCORRECT PIN." + (3 - attempts) + " attempts left.");
+                System.out.print("Enter Again: \t\t");
+                pin = input.nextInt();
+                attempts++;
+            }
         }
+        return false;
     }
 
     public abstract void withdraw(int amount);
