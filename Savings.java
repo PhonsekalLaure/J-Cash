@@ -18,6 +18,12 @@ public class Savings extends accounts{
 
     @Override
     public boolean withdraw(int amount){
+        while(amount < 500){ // Minimum withdrawal amount is 500
+            System.out.println("Withdrawal amount must be at least PHP 500.");
+            System.out.print("Enter a valid withdrawal amount: ");
+            amount = input.nextInt();  // Prompt user for a new amount
+        }
+
         while(true){
             if(amount > limit){
                 System.out.println("You have exceeded the limit of withdrawal.");
@@ -37,5 +43,19 @@ public class Savings extends accounts{
             }
         }
     }
+
+@Override
+    public void deposit(int amount){
+        while(amount < 500){ // Minimum deposit amount is 500
+            System.out.println("Deposit amount must be at least PHP 500.");
+            System.out.print("Enter a valid deposit amount: ");
+            amount = input.nextInt();  // Prompt user for a new amount
+        }
+        
+        this.setBalance(this.getBalance() + amount);
+        System.out.println("Deposit successful! New balance: PHP " + this.getBalance());
+    }
+
+    
     
 }
