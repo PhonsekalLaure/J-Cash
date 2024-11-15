@@ -4,6 +4,7 @@ import java.util.Scanner;
 public abstract class accounts {
     private int accountNo;  //randomly assigned 3 digit number
     private String name;    //name of the account holder
+    private String address; //address of the account holder
     private int pin;    //write only 4 digit pin
     private int YoB;    // year of birth
     private int balance;    //current balance in the account
@@ -24,6 +25,10 @@ public abstract class accounts {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setPin(int pin) {
@@ -80,6 +85,10 @@ public abstract class accounts {
         return this.name;
     }
 
+    public String getAddress(){
+        return this.address;
+    }
+
     public int getAge(){
         return 2024 - this.YoB;
     }
@@ -94,19 +103,20 @@ public abstract class accounts {
 
     public void getDetails(){
         System.out.println("Account Number: " + this.getAccountNo());
-        System.out.println("Name: " + this.getName());
-        System.out.println("Age: " + this.getAge());
-        System.out.println("Balance: " + this.getBalance());
+        System.out.println("Name: \t\t" + this.getName());
+        System.out.println("Age: \t\t" + this.getAge());
+        System.out.println("Address: \t" + this.getAddress());
+        System.out.println("Balance: \t" + this.getBalance());
     }
 
     public boolean verify(int pin){
         int attempts = 0;
-        while (attempts < 3){
+        while (attempts < 2){
             if(this.pin == pin){
                 return true;
             }
             else{
-                System.out.println("INCORRECT PIN." + (3 - attempts) + " attempts left.");
+                System.out.println("INCORRECT PIN. " + (2 - attempts) + " attempts left.");
                 System.out.print("Enter Again: \t\t");
                 pin = input.nextInt();
                 attempts++;
@@ -115,5 +125,5 @@ public abstract class accounts {
         return false;
     }
 
-    public abstract void withdraw(int amount);
+    public abstract boolean withdraw(int amount);
 }

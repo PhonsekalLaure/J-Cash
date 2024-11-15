@@ -3,12 +3,14 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        int count = 0, choice = 0, choice2 = 0;
-        String finalans = "n";
+        int count = 0, choice = 0, choice2 = 0, accNo;
+        String finalans = "";
+        boolean found;
         accounts acc[] = new accounts[5];
 
 
         do { 
+            clearScreen();
             JCASH();
             Menu();
             choice = input.nextInt();
@@ -19,10 +21,12 @@ public class Main {
                     JCASH();
                     if(count == 5){
                         System.out.println("Maximum number of accounts reached.\n");
+                        System.out.print("Press Enter to Continue...");
+                        input.nextLine();
                         break;
                     }
                     else{
-                        System.out.println("ACCOUNT CREATION");
+                    System.out.println("ACCOUNT CREATION");
                     System.out.println("Choose Account Type: ");
                     System.out.println("1. Savings");
                     System.out.println("2. Current");
@@ -36,35 +40,15 @@ public class Main {
                             clearScreen();
                             JCASH();
                             acc[count] = new Savings();
-                            acc[count].setAccountNo();
-                            System.out.println("Account Number: \t" + acc[count].getAccountNo());
-                            System.out.print("Enter Year of Birth: \t");
-                            acc[count].setYoB(input.nextInt());
-                            input.nextLine();
-                            System.out.print("Enter Name: \t\t");
-                            acc[count].setName(input.nextLine());
-                            System.out.print("Initial Deposit (PHP): \t");
-                            acc[count].setInitialDepo(input.nextInt());
-                            System.out.print("Set Pin: \t\t");
-                            acc[count].setPin(input.nextInt());
+                            createAccount(acc[count], input);
                             count++;
                             break;
 
                         case 2:
                             clearScreen();
                             JCASH();
-                            acc[count] = new Savings();
-                            acc[count].setAccountNo();
-                            System.out.println("Account Number: \t" + acc[count].getAccountNo());
-                            System.out.print("Enter Year of Birth: \t");
-                            acc[count].setYoB(input.nextInt());
-                            input.nextLine();
-                            System.out.print("Enter Name: \t\t");
-                            acc[count].setName(input.nextLine());
-                            System.out.print("Initial Deposit (PHP): \t");
-                            acc[count].setInitialDepo(input.nextInt());
-                            System.out.print("Set Pin: \t\t");
-                            acc[count].setPin(input.nextInt());
+                            acc[count] = new Current();
+                            createAccount(acc[count], input);
                             count++;
                             break;
 
@@ -74,33 +58,43 @@ public class Main {
                         default:
                             System.out.println("Invalid choice.");
                     }
-                    if(choice2 == 3){
+                    if (choice2 != 3) {
                         clearScreen();
-                        break;
+                        JCASH();
+                        System.out.println("Account with Account Number " + acc[count - 1].getAccountNo() + " Created!\n");
+                        input.nextLine();
+                        System.out.print("Press Enter to Continue...");
+                        input.nextLine();
                     }
-                    else{
-                    clearScreen();
-                    JCASH();
-                    System.out.println("Account with Account Number " + acc[count-1].getAccountNo() + " Created!\n");
                     }
-                }
                     break;
-                    
 
                 case 2:
                     clearScreen();
                     JCASH();
                     System.out.println("ACCOUNT SETTINGS");
-                    System.out.print("Enter Account Number: \t");
-                    int accNo = input.nextInt();
 
-                    boolean found = false;
-                    for(int i = 0; i < count; i++){
+                    if(count == 0){
+                        System.out.println("No accounts to continue this action.\n");
+                        input.nextLine();
+                        System.out.print("Press Enter to Continue...");
+                        input.nextLine();
+                        break;
+                    }
+                    else{
+                        System.out.print("Enter Account Number: \t");
+                        accNo = input.nextInt();
+
+                        found = false;
+                        for(int i = 0; i < count; i++){
                         if(acc[i].getAccountNo() == accNo){
                             found = true;
 
                                 System.out.print("Enter Pin: \t\t");
                                 if(acc[i].verify(input.nextInt())){
+                                    clearScreen();
+                                    JCASH();
+                                    System.out.println("ACCOUNT SETTINGS");
                                     System.out.println("1. Balance Inquiry");
                                     System.out.println("2. Account Details");
                                     System.out.println("3. Delete Account");
@@ -110,10 +104,14 @@ public class Main {
 
                                     switch(choice2){
                                         case 1:
+                                            System.out.println("Balance: PHP " + acc[i].getBalance());
                                             break;
 
                                         case 2:
+                                            clearScreen();
                                             acc[i].getDetails();
+                                            System.out.print("\nPress Enter to Continue...");
+                                            input.nextLine();
                                             break;
 
                                         case 3:
@@ -121,20 +119,123 @@ public class Main {
 
                                         default:
                                             System.out.println("Invalid choice.");
+                                            input.nextLine();
+                                            System.out.print("Press Enter to Continue...");
+                                            input.nextLine();
                                     }
                                 }
                                 else{
                                     System.out.println("All attempts used. Going back to main menu.");
+                                    input.nextLine();
+                                    System.out.print("Press Enter to Continue...");
+                                    input.nextLine();
                                     break;
                                 }
                         }
                         else if(!found){
                             System.out.println("Account not found.\n");
+                            input.nextLine();
+                            System.out.print("Press Enter to Continue...");
+                            input.nextLine();
                         }
+                    }
                     }
                     break;
                     
                 case 3:
+                    clearScreen();
+                    JCASH();
+                    System.out.println("TRANSACTIONS");
+                    if(count == 0){
+                        System.out.println("No accounts to continue this action.\n");
+                        System.out.print("Press Enter to Continue...");
+                        input.nextLine();
+                        input.nextLine();
+                        break;
+                    }
+                    else{
+                        System.out.print("Enter Account Number: \t");
+                        accNo = input.nextInt();
+                        found = false;
+
+                    for (int i = 0; i < count; i++) {
+                        if (acc[i].getAccountNo() == accNo) {
+                            found = true;
+
+                            System.out.print("Enter Pin: \t\t");
+                            if (acc[i].verify(input.nextInt())) {
+                                clearScreen();
+                                JCASH();
+                                System.out.println("TRANSACTIONS");
+                                System.out.println("1. Deposit");
+                                System.out.println("2. Withdraw");
+                                System.out.println("3. Go Back");
+                                System.out.print("Enter choice: ");
+                                choice2 = input.nextInt();
+
+                                switch (choice2) {
+                                    case 1: // Deposit
+                                        clearScreen();
+                                        JCASH();
+                                        System.out.println("DEPOSIT");
+                                        System.out.print("Enter Deposit Amount: \t");
+                                        acc[i].deposit(input.nextInt());
+                                        System.out.println("Deposit successful! \nNew balance: PHP " + acc[i].getBalance());
+                                        input.nextLine();
+                                        System.out.print("Press Enter to Continue...");
+                                        input.nextLine();
+                                        break;
+
+                                    case 2: // Withdraw
+                                        clearScreen();
+                                        JCASH();
+                                        System.out.println("WITHDRAW");
+                                        System.out.print("Enter Withdrawal Amount: \t");
+                                        if(acc[i].withdraw(input.nextInt())){
+                                            System.out.println("Withdrawal successful! \nNew balance: PHP " + acc[i].getBalance());
+                                            input.nextLine();
+                                            System.out.print("Press Enter to Continue...");
+                                            input.nextLine();
+                                        }
+                                        else{
+                                            System.out.println("Withdrawal failed.");
+                                            input.nextLine();
+                                            System.out.print("Press Enter to Continue...");
+                                            input.nextLine();
+                                        }
+                                        break;
+
+                                    case 3: // Go Back
+                                        System.out.println("Returning to main menu.");
+                                        input.nextLine();
+                                        System.out.print("Press Enter to Continue...");
+                                        input.nextLine();
+                                        break;
+
+                                    default:
+                                        System.out.println("Invalid choice.");
+                                        input.nextLine();
+                                        System.out.print("Press Enter to Continue...");
+                                        input.nextLine();
+                                }
+                            }
+                            else {
+                                System.out.println("All attempts used. Going back to main menu.");
+                                input.nextLine();
+                                System.out.print("Press Enter to Continue...");
+                                input.nextLine();
+                            }
+                            break;
+                        }
+                        if (!found) {
+                            System.out.println("Account not found.");
+                            input.nextLine();
+                            System.out.print("Press Enter to Continue...");
+                            input.nextLine();
+                        }
+                        break;
+                    }
+                    }
                     break;
 
                 case 4:
@@ -142,13 +243,13 @@ public class Main {
                     JCASH();
                     if(count == 0){
                         System.out.println("No accounts to display.\n");
-                        break;
                     }
                     else{
                         System.out.println("DISPLAY USERS");
                         Display(acc, count);
                     }
-                    System.out.println("Press Enter to Continue...");
+                    input.nextLine();
+                    System.out.print("Press Enter to Continue...");
                     input.nextLine();
                     break;
 
@@ -159,7 +260,9 @@ public class Main {
                     System.out.print("Are You Sure You Want To Exit? Y|N: ");
                     finalans = input.nextLine();
             }
-        } while (finalans == "N" || finalans == "n");
+        } while (!finalans.equalsIgnoreCase("Y"));
+        clearScreen();
+        JCASH();
         System.out.println("Have a Nice Day Nigger!");
         authors();
     }
@@ -176,6 +279,22 @@ public class Main {
         System.out.println("------------------------------");
         System.out.println("\tJ-CASH BANKING");
         System.out.println("------------------------------");
+    }
+
+    public static void createAccount(accounts account, Scanner input) {
+        account.setAccountNo();
+        System.out.println("Account Number: \t" + account.getAccountNo());
+        System.out.print("Enter Year of Birth: \t");
+        account.setYoB(input.nextInt());
+        input.nextLine();
+        System.out.print("Enter Name: \t\t");
+        account.setName(input.nextLine());
+        System.out.print("Enter Address: \t\t");
+        account.setAddress(input.nextLine());
+        System.out.print("Initial Deposit (PHP): \t");
+        account.setInitialDepo(input.nextInt());
+        System.out.print("Set Pin: \t\t");
+        account.setPin(input.nextInt());
     }
 
     public static void authors(){

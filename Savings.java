@@ -17,22 +17,25 @@ public class Savings extends accounts{
     }
 
     @Override
-    public void withdraw(int amount){
+    public boolean withdraw(int amount){
         while(true){
             if(amount > limit){
                 System.out.println("You have exceeded the limit of withdrawal.");
+                return false;
             }
             else if(this.getBalance() - amount < 0){
                 System.out.println("Insufficient funds.");
+                return false;
             }
             else if(amount <= 0){
                 System.out.println("Invalid amount.");
+                return false;
             }
             else{
                 this.setBalance(this.getBalance() - amount);
+                return true;
             }
         }
-        
     }
     
 }

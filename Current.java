@@ -4,15 +4,18 @@ public class Current extends accounts {
     }
 
     @Override
-    public void withdraw(int amount){
+    public boolean withdraw(int amount){
         if(this.getBalance() - amount < 0){
             System.out.println("Insufficient funds.");
+            return false;
         }
         else if(amount <= 0){
             System.out.println("Invalid amount.");
+            return false;
         }
         else{
             this.setBalance(this.getBalance() - amount);
+            return true;
         }
     }
 }
