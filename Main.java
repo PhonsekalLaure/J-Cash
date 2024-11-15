@@ -17,10 +17,16 @@ public class Main {
                 case 1:
                     clearScreen();
                     JCASH();
-                    System.out.println("ACCOUNT CREATION");
+                    if(count == 5){
+                        System.out.println("Maximum number of accounts reached.\n");
+                        break;
+                    }
+                    else{
+                        System.out.println("ACCOUNT CREATION");
                     System.out.println("Choose Account Type: ");
                     System.out.println("1. Savings");
                     System.out.println("2. Current");
+                    System.out.println("3. Go Back");
                     System.out.print("Enter choice: ");
                     choice2 = input.nextInt();
                     input.nextLine();
@@ -62,13 +68,24 @@ public class Main {
                             count++;
                             break;
 
+                        case 3:
+                            break;
+
                         default:
                             System.out.println("Invalid choice.");
                     }
+                    if(choice2 == 3){
+                        clearScreen();
+                        break;
+                    }
+                    else{
                     clearScreen();
                     JCASH();
                     System.out.println("Account with Account Number " + acc[count-1].getAccountNo() + " Created!\n");
+                    }
+                }
                     break;
+                    
 
                 case 2:
                     clearScreen();
@@ -116,25 +133,10 @@ public class Main {
                         }
                     }
                     break;
-                /*
-                 * EXAMPLE LANG
-
-                    int accNo = 0;
-                    boolean found = false;
-                    for(int i = 0; i < acc.length; i++){
-                        if(acc[i].getAccountNo() == accNo){
-                            acc[i].getDetails();
-                            found = true;
-                            break;
-                        }
-                    }
-                    if(!found){
-                        System.out.println("Account not found.");
-                    }
-                        ganto yung paraan ng pag find ng tamang account
-                 */
                     
-                //case 3:
+                case 3:
+                    break;
+
                 case 4:
                     clearScreen();
                     JCASH();
@@ -146,6 +148,8 @@ public class Main {
                         System.out.println("DISPLAY USERS");
                         Display(acc, count);
                     }
+                    System.out.println("Press Enter to Continue...");
+                    input.nextLine();
                     break;
 
                 case 5:
