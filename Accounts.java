@@ -1,6 +1,5 @@
 import java.util.Random;
 import java.util.Scanner;
-
 public abstract class Accounts {
     private int accountNo;  //randomly assigned 3 digit number
     private String name;    //name of the account holder
@@ -34,9 +33,9 @@ public abstract class Accounts {
 
     public void setPin(int pin) {
         while(true){
-            if(pin <= 999 || pin >= 10000){
+            if(pin < 1000 || pin > 9999){
                 System.out.println("PIN must contain 4 digits.");
-                System.out.print("Enter Again: \t\t");
+                System.out.print("Enter Again \t\t: ");
                 pin = input.nextInt();
             }
             else{
@@ -50,7 +49,12 @@ public abstract class Accounts {
         while(true){
             if(2024 - yob < 18){
                 System.out.println("You must be 18 years old or older to create an account.");
-                System.out.print("Enter Year of Birth: ");
+                System.out.print("Enter Again \t\t: ");
+                yob = input.nextInt();
+            }
+            else if(yob < 1900){
+                System.out.println("Invalid year of birth.");
+                System.out.print("Enter Again \t\t: ");
                 yob = input.nextInt();
             }
             else{
@@ -64,7 +68,7 @@ public abstract class Accounts {
         while(true){
             if(initialDepo < 3000){
                 System.out.println("Initial deposit must be at least PHP 3000.");
-                System.out.print("Enter Again: \t\t");
+                System.out.print("Enter Again \t\t: ");
                 initialDepo = input.nextInt();
             }
             else{
@@ -101,36 +105,47 @@ public abstract class Accounts {
     public void deposit(int amount){
         while(amount < 500){ // Minimum deposit amount is 500
             System.out.println("Deposit amount must be at least PHP 500.");
-            System.out.print("Enter a valid deposit amount: ");
+            System.out.print("Enter a valid deposit amount : ");
             amount = input.nextInt();  // Prompt user for a new amount
         }
         
         this.setBalance(this.getBalance() + amount);
-        System.out.println("Deposit successful! New balance: PHP " + this.getBalance());
+        System.out.println("Account Number \t: " + this.getAccountNo());
+        System.out.printf("Deposit successful! \nNew balance \t: PHP%, .2f%n", (double) this.getBalance());
     }
 
     public void getDetails(){
-        System.out.println("Account Number: " + this.getAccountNo());
-        System.out.println("Name: \t\t" + this.getName());
-        System.out.println("Age: \t\t" + this.getAge());
-        System.out.println("Address: \t" + this.getAddress());
+        System.out.println("Account Number \t: " + this.getAccountNo());
+        System.out.println("Account Type \t: " + this.getClass().getSimpleName());
+        System.out.println("Name \t\t: " + this.getName());
+        System.out.println("Age \t\t: " + this.getAge());
+        System.out.println("Address \t: " + this.getAddress());
     }
 
     public boolean verify(int pin){
         int attempts = 0;
-        while (attempts < 2){
+        while (attempts < 3){
             if(this.pin == pin){
                 return true;
             }
             else{
-                System.out.println("INCORRECT PIN. " + (2 - attempts) + " attempts left.");
-                System.out.print("Enter Again: \t\t");
-                pin = input.nextInt();
-                attempts++;
+                if (attempts == 2) {
+                    return false;
+                }
+                else{
+                    System.out.println("INCORRECT PIN. " + (2 - attempts) + " attempts left.");
+                    System.out.print("Enter Again \t\t: ");
+                    pin = input.nextInt();
+                    attempts++;
+                }
+                
             }
+            
         }
         return false;
     }
 
     public abstract boolean withdraw(int amount);
+
+    public abstract void viewBalance();
 }

@@ -1,3 +1,5 @@
+import java.lang.Math;
+
 public class Savings extends Accounts{
     private double interest;
     private int limit;
@@ -6,14 +8,6 @@ public class Savings extends Accounts{
         super();
         interest = 0.0625;
         limit = 10000;
-    }
-
-    public void checkInterest(){
-        int balance = this.getBalance();
-        for(int i = 0; i < 10; i++){
-            balance += balance * this.interest;
-        }
-        System.out.println("The balance after 10 years with an interest rate of 6.25% is: " + balance); //gagawing printf
     }
 
     @Override
@@ -43,5 +37,17 @@ public class Savings extends Accounts{
             }
         }
     }
+
+    @Override//overridden method from accounts, this method is used to view balance and checking if account type has interest
+    public void viewBalance(){
+        int principal = this.getBalance();
+        System.out.println("BALANCE INQUIRY");
+        System.out.println("Account type\t\t: Savings");
+        System.out.printf("Account Balance\t\t: PHP %, .2f%n",(double) this.getBalance());
+        System.out.printf("Current Interest\t: 6.25%%") ;
+        System.out.printf("\n\nTotal balance with interest after 1 year\t\t: PHP %, .2f%n",(double) principal * Math.pow(1 + this.interest, 1));
+        System.out.printf("Total balance with interest after 5 years\t\t: PHP %, .2f%n",(double) principal * Math.pow(1 + this.interest, 5));
+        System.out.printf("Total balance with interest after 10 years\t\t: PHP %, .2f%n",(double) principal * Math.pow(1 + this.interest, 10));
+        }
     
 }

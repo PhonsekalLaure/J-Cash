@@ -31,7 +31,7 @@ public class Main {
                     System.out.println("1. Savings");
                     System.out.println("2. Current");
                     System.out.println("3. Go Back");
-                    System.out.print("Enter choice: ");
+                    System.out.print("\nEnter choice: ");
                     choice2 = input.nextInt();
                     input.nextLine();
 
@@ -83,7 +83,7 @@ public class Main {
                         break;
                     }
                     else{
-                        System.out.print("Enter Account Number: \t");
+                        System.out.print("Enter Account Number \t: ");
                         accNo = input.nextInt();
 
                         found = false;
@@ -91,7 +91,7 @@ public class Main {
                         if(acc[i].getAccountNo() == accNo){
                             found = true;
 
-                                System.out.print("Enter Pin: \t\t");
+                                System.out.print("Enter Pin \t\t: ");
                                 if(acc[i].verify(input.nextInt())){
                                     clearScreen();
                                     JCASH();
@@ -101,7 +101,7 @@ public class Main {
                                     System.out.println("3. Currency Converter");
                                     System.out.println("4. Delete Account");
                                     System.out.println("5. Go Back");
-                                    System.out.print("Enter choice: ");
+                                    System.out.print("\nEnter choice: ");
                                     choice2 = input.nextInt();
                                     input.nextLine();
 
@@ -109,6 +109,9 @@ public class Main {
                                         case 1:// Balance Inquiry
                                             clearScreen();
                                             JCASH();
+                                            acc[i].viewBalance();
+                                            System.out.print("\nPress Enter to Continue...");
+                                            input.nextLine();
                                             break;
 
                                         case 2://Account Details
@@ -120,6 +123,12 @@ public class Main {
                                             break;
 
                                         case 3://Currency Converter
+                                            clearScreen();
+                                            JCASH();
+                                            currencyConvert(acc[i].getBalance());
+                                            System.out.print("\nPress Enter to Continue...");
+                                            input.nextLine();
+                                            break;
 
                                         case 4:// 
                                             clearScreen();
@@ -139,17 +148,17 @@ public class Main {
                                 else{
                                     System.out.println("All attempts used. Going back to main menu.");
                                     input.nextLine();
-                                    System.out.print("Press Enter to Continue...");
+                                    System.out.print("\nPress Enter to Continue...");
                                     input.nextLine();
                                     break;
                                 }
                         }
-                        else if(!found){
-                            System.out.println("Account not found.\n");
-                            input.nextLine();
-                            System.out.print("Press Enter to Continue...");
-                            input.nextLine();
-                        }
+                    }
+                    if(!found){
+                        System.out.println("Account not found.\n");
+                        input.nextLine();
+                        System.out.print("Press Enter to Continue...");
+                        input.nextLine();
                     }
                     }
                     break;
@@ -166,7 +175,7 @@ public class Main {
                         break;
                     }
                     else{
-                        System.out.print("Enter Account Number: \t");
+                        System.out.print("Enter Account Number \t: ");
                         accNo = input.nextInt();
                         found = false;
 
@@ -174,7 +183,7 @@ public class Main {
                         if (acc[i].getAccountNo() == accNo) {
                             found = true;
 
-                            System.out.print("Enter Pin: \t\t");
+                            System.out.print("Enter Pin \t\t: ");
                             if (acc[i].verify(input.nextInt())) {
                                 clearScreen();
                                 JCASH();
@@ -182,7 +191,7 @@ public class Main {
                                 System.out.println("1. Deposit");
                                 System.out.println("2. Withdraw");
                                 System.out.println("3. Go Back");
-                                System.out.print("Enter choice: ");
+                                System.out.print("\nEnter choice: ");
                                 choice2 = input.nextInt();
 
                                 switch (choice2) {
@@ -190,11 +199,10 @@ public class Main {
                                         clearScreen();
                                         JCASH();
                                         System.out.println("DEPOSIT");
-                                        System.out.print("Enter Deposit Amount: \t");
+                                        System.out.print("Enter Deposit Amount \t: PHP ");
                                         acc[i].deposit(input.nextInt());
-                                        System.out.println("Deposit successful! \nNew balance: PHP " + acc[i].getBalance());
                                         input.nextLine();
-                                        System.out.print("Press Enter to Continue...");
+                                        System.out.print("\nPress Enter to Continue...");
                                         input.nextLine();
                                         break;
 
@@ -202,17 +210,19 @@ public class Main {
                                         clearScreen();
                                         JCASH();
                                         System.out.println("WITHDRAW");
-                                        System.out.print("Enter Withdrawal Amount: \t");
+                                        System.out.print("Enter Withdrawal Amount : PHP ");
                                         if(acc[i].withdraw(input.nextInt())){
-                                            System.out.println("Withdrawal successful! \nNew balance: PHP " + acc[i].getBalance());
+                                            clearScreen();
+                                            System.out.println("Account Number \t: " + acc[i].getAccountNo());
+                                            System.out.printf("Withdrawal successful! \nNew balance \t: PHP%, .2f%n", (double) acc[i].getBalance());
                                             input.nextLine();
-                                            System.out.print("Press Enter to Continue...");
+                                            System.out.print("\nPress Enter to Continue...");
                                             input.nextLine();
                                         }
                                         else{
                                             System.out.println("Withdrawal failed.");
                                             input.nextLine();
-                                            System.out.print("Press Enter to Continue...");
+                                            System.out.print("\nPress Enter to Continue...");
                                             input.nextLine();
                                         }
                                         break;
@@ -223,25 +233,24 @@ public class Main {
                                     default:
                                         System.out.println("Invalid choice.");
                                         input.nextLine();
-                                        System.out.print("Press Enter to Continue...");
+                                        System.out.print("\nPress Enter to Continue...");
                                         input.nextLine();
                                 }
                             }
                             else {
                                 System.out.println("All attempts used. Going back to main menu.");
                                 input.nextLine();
-                                System.out.print("Press Enter to Continue...");
+                                System.out.print("\nPress Enter to Continue...");
                                 input.nextLine();
                             }
                             break;
                         }
-                        if (!found) {
-                            System.out.println("Account not found.");
-                            input.nextLine();
-                            System.out.print("\nPress Enter to Continue...");
-                            input.nextLine();
-                        }
-                        break;
+                    }
+                    if (!found) {
+                        System.out.println("Account not found.");
+                        input.nextLine();
+                        System.out.print("\nPress Enter to Continue...");
+                        input.nextLine();
                     }
                     }
                     break;
@@ -286,7 +295,7 @@ public class Main {
         System.out.println("3. Transactions");
         System.out.println("4. Display Users");
         System.out.println("5. Exit");
-        System.out.print("Enter choice: ");
+        System.out.print("\nEnter choice: ");
     }
 
     public static void JCASH(){
@@ -297,23 +306,24 @@ public class Main {
 
     public static void createAccount(Accounts account, Scanner input) {
         account.setAccountNo();
-        System.out.println("Account Number: \t" + account.getAccountNo());
-        System.out.print("Enter Year of Birth: \t");
+        System.out.println("Account Number \t\t: " + account.getAccountNo());
+        System.out.print("Enter Year of Birth \t: ");
         account.setYoB(input.nextInt());
         input.nextLine();
-        System.out.print("Enter Name: \t\t");
+        System.out.print("Enter Name \t\t: ");
         account.setName(input.nextLine());
-        System.out.print("Enter Address: \t\t");
+        System.out.print("Enter Address \t\t: ");
         account.setAddress(input.nextLine());
-        System.out.print("Initial Deposit (PHP): \t");
+        System.out.print("Initial Deposit (PHP) \t: ");
         account.setInitialDepo(input.nextInt());
-        System.out.print("Set Pin: \t\t");
+        System.out.print("Set Pin \t\t: ");
         account.setPin(input.nextInt());
     }
 
     public static void Display(Accounts[] acc, int count){
         for(int i = 0; i < count; i++){
-            System.out.println("Account Number: " + acc[i].getAccountNo());
+            System.out.println("Account Number\t: " + acc[i].getAccountNo());
+            System.out.println("Account Type\t: " + acc[i].getClass().getSimpleName());
             System.out.println();
         }
     }
@@ -326,6 +336,32 @@ public class Main {
         System.out.println("Dominic Madlangbayan");
         System.out.println("Mark Gamboa");
         System.out.println("Ronn Rosarito\n");
+    }
+
+    public static void currencyConvert(int php){
+        System.out.printf("Your current balance is PHP%, .2f%n",(double) php);
+        System.out.printf("Converted Balance:\n");
+        
+        double usd = php/50.0; //PHP to USD
+        System.out.printf("\nUS Dollar \t:\t%, .2f%n",usd);
+        
+        //PHP to EURO
+        System.out.printf("Euro\t\t:\t%, .2f%n",usd*0.734719);
+        
+        //PHP to YUAN
+        System.out.printf("Yuan\t\t:\t%, .2f%n",usd*6.346934);
+        
+        //PHP to KORUNA
+        System.out.printf("Koruna\t\t:\t%, .2f%n",usd*18.77263);
+        
+        //PHP to KRONE
+        System.out.printf("Krone\t\t:\t%, .2f%n",usd*5.449007);
+        
+        //PHP to SHEGEL
+        System.out.printf("Shegel\t\t:\t%, .2f%n",usd*3.726334);
+        
+        //PHP to DINAR
+        System.out.printf("Dinar\t\t:\t%, .2f%n",usd*0.274588);
     }
 
     public static void clearScreen() {

@@ -24,4 +24,12 @@ public class Current extends Accounts {
             return true;
         }
     }
+
+    @Override//overridden method from accounts, this method is used to view balance and checking if account type has interest
+    public void viewBalance(){
+        System.out.println("BALANCE INQUIRY");
+        System.out.println("Account type\t: Current");
+        System.out.printf("Account Balance\t: PHP %, .2f%n",(double) this.getBalance());
+        
+    }
 }
