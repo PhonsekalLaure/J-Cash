@@ -1,4 +1,4 @@
-public class Savings extends accounts{
+public class Savings extends Accounts{
     private double interest;
     private int limit;
 
@@ -25,7 +25,7 @@ public class Savings extends accounts{
         }
 
         while(true){
-            if(amount > limit){
+            if(amount > this.limit){
                 System.out.println("You have exceeded the limit of withdrawal.");
                 return false;
             }

@@ -1,9 +1,9 @@
-public class Current extends accounts {
+public class Current extends Accounts {
     public Current(){
         super();
     }
 
-    @Override
+    @Override//overridden method from accounts, this method is used to withdraw money from the account
     public boolean withdraw(int amount){
         while(amount < 500){ // Minimum withdrawal amount is 500
             System.out.println("Withdrawal amount must be at least PHP 500.");
@@ -11,15 +11,15 @@ public class Current extends accounts {
             amount = input.nextInt();  // Prompt user for a new amount
         }
         
-        if(this.getBalance() - amount < 0){
+        if(this.getBalance() - amount < 0){// checks if the balance is enough to withdraw the amount
             System.out.println("Insufficient funds.");
             return false;
         }
-        else if(amount <= 0){
+        else if(amount <= 0){//checks if the amount is valid
             System.out.println("Invalid amount.");
             return false;
         }
-        else{
+        else{//if the amount is valid and the balance is enough, the amount is withdrawn
             this.setBalance(this.getBalance() - amount);
             return true;
         }

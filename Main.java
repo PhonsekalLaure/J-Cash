@@ -6,7 +6,7 @@ public class Main {
         int count = 0, choice = 0, choice2 = 0, accNo;
         String finalans = "";
         boolean found;
-        accounts acc[] = new accounts[5];
+        Accounts acc[] = new Accounts[5];
 
 
         do { 
@@ -267,6 +267,12 @@ public class Main {
                     input.nextLine();
                     System.out.print("Are You Sure You Want To Exit? Y|N: ");
                     finalans = input.nextLine();
+
+                default:
+                    System.out.println("Invalid choice.");
+                    input.nextLine();
+                    System.out.print("Press Enter to Continue...");
+                    input.nextLine();
             }
         } while (!finalans.equalsIgnoreCase("Y"));
         clearScreen();
@@ -288,7 +294,7 @@ public class Main {
         System.out.println("------------------------------");
     }
 
-    public static void createAccount(accounts account, Scanner input) {
+    public static void createAccount(Accounts account, Scanner input) {
         account.setAccountNo();
         System.out.println("Account Number: \t" + account.getAccountNo());
         System.out.print("Enter Year of Birth: \t");
@@ -304,7 +310,7 @@ public class Main {
         account.setPin(input.nextInt());
     }
 
-    public static void Display(accounts[] acc, int count){
+    public static void Display(Accounts[] acc, int count){
         for(int i = 0; i < count; i++){
             System.out.println("Account Number: " + acc[i].getAccountNo());
             System.out.println();
