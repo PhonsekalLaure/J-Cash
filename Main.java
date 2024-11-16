@@ -267,6 +267,7 @@ public class Main {
                     input.nextLine();
                     System.out.print("Are You Sure You Want To Exit? Y|N: ");
                     finalans = input.nextLine();
+                    break;
 
                 default:
                     System.out.println("Invalid choice.");
