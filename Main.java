@@ -130,12 +130,23 @@ public class Main {
                                             input.nextLine();
                                             break;
 
-                                        case 4:// 
+                                        case 4://delete account
                                             clearScreen();
                                             JCASH();
+                                            if(confirmation(accNo, input)){
+                                                deleteAccount(acc, i, count);
+                                                count--;
+                                                System.out.println("Account Deleted.");
+                                                System.out.print("\nPress Enter to Continue...");
+                                                input.nextLine();
+                                            } else {
+                                                System.out.println("Account not deleted.");
+                                                System.out.print("\nPress Enter to Continue...");
+                                                input.nextLine();
+                                            }
                                             break;
 
-                                        case 5:
+                                        case 5://go back
                                             break;
 
                                         default:
@@ -362,6 +373,19 @@ public class Main {
         
         //PHP to DINAR
         System.out.printf("Dinar\t\t:\t%, .2f%n",usd*0.274588);
+    }
+
+    public static boolean confirmation(int accNo, Scanner input){
+        System.out.print("Are you sure you want to delete your account " + accNo + "? (Y/N): ");
+        String confirmation = input.nextLine().trim().toUpperCase();
+        return confirmation.equals("Y");
+    }
+    
+    public static void deleteAccount(Accounts[] acc, int index, int count) {
+        for (int i = index; i < count - 1; i++) {
+            acc[i] = acc[i + 1];
+        }
+        acc[count - 1] = null;
     }
 
     public static void clearScreen() {
