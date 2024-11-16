@@ -296,6 +296,7 @@ public class Main {
                     input.nextLine();
             }
         } while (!finalans.equalsIgnoreCase("Y"));
+        input.close();
         clearScreen();
         JCASH();
         authors();
