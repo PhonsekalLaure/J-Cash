@@ -47,7 +47,7 @@ public abstract class accounts {
 
     public void setYoB(int yob){
         while(true){
-            if(2024 - yob <= 17){
+            if(2024 - yob < 18){
                 System.out.println("You must be 18 years old or older to create an account.");
                 System.out.print("Enter Year of Birth: ");
                 yob = input.nextInt();
@@ -61,7 +61,7 @@ public abstract class accounts {
 
     public void setInitialDepo(int initialDepo) {
         while(true){
-            if(initialDepo <= 2999){
+            if(initialDepo < 3000){
                 System.out.println("Initial deposit must be at least PHP 3000.");
                 System.out.print("Enter Again: \t\t");
                 initialDepo = input.nextInt();

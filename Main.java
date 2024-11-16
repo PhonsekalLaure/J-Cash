@@ -238,7 +238,7 @@ public class Main {
                         if (!found) {
                             System.out.println("Account not found.");
                             input.nextLine();
-                            System.out.print("Press Enter to Continue...");
+                            System.out.print("\nPress Enter to Continue...");
                             input.nextLine();
                         }
                         break;
