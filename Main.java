@@ -61,6 +61,7 @@ public class Main {
                     if (choice2 != 3) {
                         clearScreen();
                         JCASH();
+                        System.out.println("Success!");
                         System.out.println("Account with Account Number " + acc[count - 1].getAccountNo() + " Created!\n");
                         input.nextLine();
                         System.out.print("Press Enter to Continue...");
@@ -97,24 +98,35 @@ public class Main {
                                     System.out.println("ACCOUNT SETTINGS");
                                     System.out.println("1. Balance Inquiry");
                                     System.out.println("2. Account Details");
-                                    System.out.println("3. Delete Account");
+                                    System.out.println("3. Currency Converter");
+                                    System.out.println("4. Delete Account");
+                                    System.out.println("5. Go Back");
                                     System.out.print("Enter choice: ");
                                     choice2 = input.nextInt();
                                     input.nextLine();
 
                                     switch(choice2){
-                                        case 1:
-                                            System.out.println("Balance: PHP " + acc[i].getBalance());
+                                        case 1:// Balance Inquiry
+                                            clearScreen();
+                                            JCASH();
                                             break;
 
-                                        case 2:
+                                        case 2://Account Details
                                             clearScreen();
+                                            JCASH();
                                             acc[i].getDetails();
                                             System.out.print("\nPress Enter to Continue...");
                                             input.nextLine();
                                             break;
 
-                                        case 3:
+                                        case 3://Currency Converter
+
+                                        case 4:// 
+                                            clearScreen();
+                                            JCASH();
+                                            break;
+
+                                        case 5:
                                             break;
 
                                         default:
@@ -206,10 +218,6 @@ public class Main {
                                         break;
 
                                     case 3: // Go Back
-                                        System.out.println("Returning to main menu.");
-                                        input.nextLine();
-                                        System.out.print("Press Enter to Continue...");
-                                        input.nextLine();
                                         break;
 
                                     default:
@@ -263,7 +271,6 @@ public class Main {
         } while (!finalans.equalsIgnoreCase("Y"));
         clearScreen();
         JCASH();
-        System.out.println("Have a Nice Day Nigger!");
         authors();
     }
     public static void Menu(){
@@ -297,21 +304,23 @@ public class Main {
         account.setPin(input.nextInt());
     }
 
-    public static void authors(){
-        System.out.println("Thank you for using J-CASH Banking.");
-        System.out.println("Marlo Veluz");
-        System.out.println("Dominic Madlangbayan");
-        System.out.println("Mark Gamboa");
-        System.out.println("Ronn Rosarito");
-    }
-
     public static void Display(accounts[] acc, int count){
         for(int i = 0; i < count; i++){
             System.out.println("Account Number: " + acc[i].getAccountNo());
             System.out.println();
         }
     }
-//clear screen
+
+    public static void authors(){
+        System.out.println("Thank you for using J-CASH Banking.");
+        System.out.println("Have a Nice Day!\n");
+        System.out.println("Created by:");
+        System.out.println("Marlo Veluz");
+        System.out.println("Dominic Madlangbayan");
+        System.out.println("Mark Gamboa");
+        System.out.println("Ronn Rosarito\n");
+    }
+
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();

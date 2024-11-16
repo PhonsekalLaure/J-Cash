@@ -35,7 +35,7 @@ public abstract class accounts {
         while(true){
             if(pin <= 999 || pin >= 10000){
                 System.out.println("PIN must contain 4 digits.");
-                System.out.print("Enter PIN: ");
+                System.out.print("Enter Again: \t\t");
                 pin = input.nextInt();
             }
             else{
@@ -63,7 +63,7 @@ public abstract class accounts {
         while(true){
             if(initialDepo <= 2999){
                 System.out.println("Initial deposit must be at least PHP 3000.");
-                System.out.print("Enter Initial Deposit: \t");
+                System.out.print("Enter Again: \t\t");
                 initialDepo = input.nextInt();
             }
             else{
@@ -98,7 +98,14 @@ public abstract class accounts {
     }
 
     public void deposit(int amount){
-            this.balance += amount;
+        while(amount < 500){ // Minimum deposit amount is 500
+            System.out.println("Deposit amount must be at least PHP 500.");
+            System.out.print("Enter a valid deposit amount: ");
+            amount = input.nextInt();  // Prompt user for a new amount
+        }
+        
+        this.setBalance(this.getBalance() + amount);
+        System.out.println("Deposit successful! New balance: PHP " + this.getBalance());
     }
 
     public void getDetails(){
@@ -106,7 +113,6 @@ public abstract class accounts {
         System.out.println("Name: \t\t" + this.getName());
         System.out.println("Age: \t\t" + this.getAge());
         System.out.println("Address: \t" + this.getAddress());
-        System.out.println("Balance: \t" + this.getBalance());
     }
 
     public boolean verify(int pin){
