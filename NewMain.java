@@ -12,7 +12,7 @@ public class NewMain {
         do{
             clearScreen();
             JCASH();
-            System.out.println("1. Login\n2. Exit\n");
+            System.out.println("1. Login\n2. Exit\n");  // Main menu, login as an admin first to create accounts
             System.out.print("Enter choice: ");
             choice = input.nextInt();
             input.nextLine();
@@ -22,14 +22,14 @@ public class NewMain {
                     clearScreen();
                     JCASH();
                     System.out.println("LOGIN");
-                    System.out.print("Enter account number\t: ");
+                    System.out.print("Enter account number\t: ");   //to login as an admin, enter "admin"
                     accNo = input.nextLine();
                     found = false;
 
                     if(accNo.equalsIgnoreCase("admin")){
                         found = true;
                         
-                        System.out.print("Enter Admin Pin \t: ");
+                        System.out.print("Enter Admin Pin \t: "); // Admin pin is 1234 with 3 attempts, it can be changed above
                         if(adminAuth(input)){
                             do{
                                 clearScreen();
@@ -164,8 +164,15 @@ public class NewMain {
                                                 input.nextLine();
                                         }
                                     } while (choice2 != 6);
+                                    break;
                                 }
-
+                                else{
+                                    System.out.println("\nAll attempts used. Going back to main menu.");
+                                    input.nextLine();
+                                    System.out.print("Press Enter to Continue...");
+                                    input.nextLine();
+                                    break;
+                                }
                             }
                         }
                     }
@@ -187,7 +194,10 @@ public class NewMain {
                     input.nextLine();
             }
         }while(!finalans.equalsIgnoreCase("Y"));
-
+        input.close();
+        clearScreen();
+        JCASH();
+        authors();
     }
     public static void JCASH(){//displays the Bank name
         System.out.println("------------------------------");
