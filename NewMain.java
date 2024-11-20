@@ -126,7 +126,6 @@ public class NewMain {
                         }
                     }
                     else{
-                        found = false;
                         for(int i = 0; i < count; i++){
                             if(Integer.parseInt(accNo) == acc[i].getAccountNo()){
                                 found = true;
