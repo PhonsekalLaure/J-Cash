@@ -42,14 +42,19 @@ public class NewMain {
                                 switch(choice2){
                                     case 1://creates an account
                                         if(count == 5){
+                                            clearScreen();
+                                            JCASH();
                                             System.out.println("Maximum number of accounts reached.");
                                             System.out.print("Press Enter to Continue...");
                                             input.nextLine();//waits for the user to press enter
                                             break;
                                         }
                                         else{
+                                            clearScreen();
+                                            JCASH();
+                                            System.out.println("ACCOUNT CREATION");
                                             System.out.println("1. Savings\n2. Current\n3. Go Back");
-                                            System.out.print("Enter account type: ");
+                                            System.out.print("\nEnter choice: ");
                                             choice3 = input.nextInt();
 
                                             switch(choice3){
@@ -77,7 +82,7 @@ public class NewMain {
                                                     System.out.print("\nPress Enter to Continue...");
                                                     input.nextLine();
                                             }
-                                            if (choice2 < 3) {//if the user chose to create an account
+                                            if (choice3 < 3) {//if the user chose to create an account
                                                 clearScreen();
                                                 JCASH();
                                                 System.out.println("Success!");
@@ -113,9 +118,9 @@ public class NewMain {
                             }while(choice2 != 4);
                         }
                         else{
-                            System.out.println("All attempts used. Going back to main menu.");
+                            System.out.println("\nAll attempts used. Going back to main menu.");
                             input.nextLine();
-                            System.out.print("\nPress Enter to Continue...");
+                            System.out.print("Press Enter to Continue...");
                             input.nextLine();
                             break;
                         }
@@ -126,38 +131,47 @@ public class NewMain {
                             if(Integer.parseInt(accNo) == acc[i].getAccountNo()){
                                 found = true;
 
-                                System.out.println("Enter Pin \t: ");
+                                System.out.print("Enter Pin \t\t: ");
                                 if(acc[i].verify(input.nextInt())){
-                                    clearScreen();
-                                    JCASH();
-                                    System.out.println("Welcome " + acc[i].getName() + "!");
-                                    System.out.println("1. Deposit\n2. Withdraw\n3. View Balance\n4. Currency Converter\n5. Account Details\n6. Exit\n");
-                                    System.out.print("Enter choice: ");
-                                    choice2 = input.nextInt();
+                                    do { 
+                                        clearScreen();
+                                        JCASH();
+                                        System.out.println("Welcome " + acc[i].getName().toUpperCase() + "!");
+                                        System.out.println("1. Deposit\n2. Withdraw\n3. View Balance\n4. Currency Converter\n5. Account Details\n6. Exit\n");
+                                        System.out.print("Enter choice: ");
+                                        choice2 = input.nextInt();
 
-                                    switch(choice2){
-                                        case 1://deposits money to the account
-                                        case 2://withdraws money from the account
-                                        case 3://displays the account balance
-                                        case 4://converts the currency
-                                        case 5://displays the account details
-                                            clearScreen();
-                                            JCASH();
-                                            acc[i].getDetails();//calls the getDetails method
-                                            System.out.print("\nPress Enter to Continue...");
-                                            input.nextLine();
-                                            break;
+                                        switch(choice2){
+                                            case 1://deposits money to the account
+                                            case 2://withdraws money from the account
+                                            case 3://displays the account balance
+                                            case 4://converts the currency
+                                            case 5://displays the account details
+                                                clearScreen();
+                                                JCASH();
+                                                acc[i].getDetails();//calls the getDetails method
+                                                input.nextLine();
+                                                System.out.print("\nPress Enter to Continue...");
+                                                input.nextLine();
+                                                break;
 
-                                        case 6:
-                                            break;
-                                    }
+                                            case 6:
+                                                break;
+                                            
+                                            default:
+                                                System.out.println("Invalid choice.");
+                                                input.nextLine();
+                                                System.out.print("Press Enter to Continue...");
+                                                input.nextLine();
+                                        }
+                                    } while (choice2 != 6);
                                 }
 
                             }
                         }
                     }
                     if(!found){
-                        System.out.println("Account not found.");
+                        System.out.println("\nAccount not found.");
                         System.out.print("Press Enter to Continue...");
                         input.nextLine();
                     }
@@ -228,7 +242,7 @@ public class NewMain {
     public static void Display(Accounts[] acc, int count){//displays the accounts
         for(int i = 0; i < count; i++){
             System.out.println("Account Number\t: " + acc[i].getAccountNo());
-            System.out.println("Account Type\t: " + acc[i].getClass().getSimpleName());
+            System.out.println("Account Type\t: " + acc[i].getClass().getSimpleName().toUpperCase());
             System.out.println();
         }
     }

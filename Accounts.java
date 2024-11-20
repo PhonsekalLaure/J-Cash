@@ -117,10 +117,10 @@ public abstract class Accounts {
 
     public void getDetails(){//method to display the account details
         System.out.println("Account Number \t: " + this.getAccountNo());
-        System.out.println("Account Type \t: " + this.getClass().getSimpleName());
-        System.out.println("Name \t\t: " + this.getName());
+        System.out.println("Account Type \t: " + this.getClass().getSimpleName().toUpperCase());
+        System.out.println("Name \t\t: " + this.getName().toUpperCase());
         System.out.println("Age \t\t: " + this.getAge());
-        System.out.println("Address \t: " + this.getAddress());
+        System.out.println("Address \t: " + this.getAddress().toUpperCase());
     }
 
     public boolean verify(int pin){//method to verify the pin
