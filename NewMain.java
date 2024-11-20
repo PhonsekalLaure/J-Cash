@@ -10,6 +10,7 @@ public class NewMain {
         Accounts acc[] = new Accounts[5];//array of accounts with a maximum of 5 accounts
 
         do{
+            clearScreen();
             JCASH();
             System.out.println("1. Login\n2. Exit\n");
             System.out.print("Enter choice: ");
@@ -27,9 +28,8 @@ public class NewMain {
 
                     if(accNo.equalsIgnoreCase("admin")){
                         found = true;
-
+                        
                         System.out.print("Enter Admin Pin \t: ");
-                        input.nextLine();
                         if(adminAuth(input)){
                             do{
                                 clearScreen();
@@ -156,6 +156,11 @@ public class NewMain {
                             }
                         }
                     }
+                    if(!found){
+                        System.out.println("Account not found.");
+                        System.out.print("Press Enter to Continue...");
+                        input.nextLine();
+                    }
                     break;
 
                 case 2:
@@ -183,7 +188,8 @@ public class NewMain {
     }
 
     public static boolean adminAuth(Scanner input){//method to verify the pin
-        int attempts = 0, pin = 0;       // Number of attempts
+        int attempts = 0, pin;
+        pin = input.nextInt();       // Number of attempts
         while (attempts < 3){ 
             if(adminPin == pin){//checks if the pin is correct
                 return true;
