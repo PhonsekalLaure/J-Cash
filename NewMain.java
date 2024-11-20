@@ -14,6 +14,7 @@ public class NewMain {
             System.out.println("1. Login\n2. Exit\n");
             System.out.print("Enter choice: ");
             choice = input.nextInt();
+            input.nextLine();
 
             switch(choice){
                 case 1:
@@ -22,14 +23,13 @@ public class NewMain {
                     System.out.println("LOGIN");
                     System.out.print("Enter account number\t: ");
                     accNo = input.nextLine();
-                    input.nextLine();
                     found = false;
 
                     if(accNo.equalsIgnoreCase("admin")){
                         found = true;
 
-                        
                         System.out.print("Enter Admin Pin \t: ");
+                        input.nextLine();
                         if(adminAuth(input)){
                             do{
                                 clearScreen();
