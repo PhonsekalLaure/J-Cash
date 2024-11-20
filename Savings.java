@@ -6,8 +6,8 @@ public class Savings extends Accounts{
 
     public Savings(){
         super();
-        interest = 0.0625;
-        limit = 10000;
+        interest = 0.0625; //sets the interest to 6.25%
+        limit = 10000; //sets the limit of withdrawal to 10000
     }
 
     @Override
@@ -19,19 +19,19 @@ public class Savings extends Accounts{
         }
 
         while(true){
-            if(amount > this.limit){
+            if(amount > this.limit){ //checks if the amount exceeds the limit
                 System.out.println("You have exceeded the limit of withdrawal.");
                 return false;
             }
-            else if(this.getBalance() - amount < 0){
+            else if(this.getBalance() - amount < 0){ // checks if the balance is enough to withdraw the amount
                 System.out.println("Insufficient funds.");
                 return false;
             }
-            else if(amount <= 0){
+            else if(amount <= 0){//checks if the amount is valid
                 System.out.println("Invalid amount.");
                 return false;
             }
-            else{
+            else{//if the amount is valid and the balance is enough, the amount is withdrawn
                 this.setBalance(this.getBalance() - amount);
                 return true;
             }

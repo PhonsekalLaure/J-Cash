@@ -29,7 +29,7 @@ public class Current extends Accounts {
     public void viewBalance(){
         System.out.println("BALANCE INQUIRY");
         System.out.println("Account type\t: Current");
-        System.out.printf("Account Balance\t: PHP %, .2f%n",(double) this.getBalance());
+        System.out.printf("Account Balance\t: PHP %, .2f%n",(double) this.getBalance()); //since balance is an integer variable it is casted to double to display the decimal places
         
     }
 }
