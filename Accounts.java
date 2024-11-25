@@ -1,4 +1,3 @@
-import java.util.Random;
 import java.util.Scanner;
 public abstract class Accounts {
     private int accountNo;  //randomly assigned 3 digit number
@@ -19,9 +18,9 @@ public abstract class Accounts {
         YoB = 0;
     }
 
-    public void setAccountNo() {
-        Random accountNo = new Random();
-        this.accountNo = accountNo.nextInt(900) + 100; // Generates a random number between 100 and 999
+    
+    public void setAccountNo(int accountNo) {
+        this.accountNo = accountNo;
     }
 
     public void setName(String name) {//a setter method for name
@@ -102,6 +101,9 @@ public abstract class Accounts {
     public int getBalance(){//a getter method for balance
         return this.balance;
     }
+    public int getPin(){//a getter method for pin
+        return this.pin;
+    }
 
     public void deposit(int amount){//method to deposit money to the account
         while(amount < 500){ // Minimum deposit amount is 500
@@ -109,10 +111,8 @@ public abstract class Accounts {
             System.out.print("Enter a valid deposit amount : ");
             amount = input.nextInt();  // Prompt user for a new amount
         }
-        
         this.setBalance(this.getBalance() + amount);
-        System.out.println("Account Number \t: " + this.getAccountNo());
-        System.out.printf("Deposit successful! \nNew balance \t: PHP%, .2f%n", (double) this.getBalance());
+        System.out.printf("Deposit successful! \nNew balance \t\t: PHP%, .2f%n", (double) this.getBalance());
     }
 
     public void getDetails(){//method to display the account details
