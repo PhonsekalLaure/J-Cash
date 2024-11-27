@@ -144,6 +144,12 @@ public class Hmain {
     
                                     case 4: // exits the admin menu
                                         break;
+
+                                    default:
+                                        System.out.println("Invalid choice.");
+                                        input.nextLine();
+                                        System.out.print("Press Enter to Continue...");
+                                        input.nextLine();
                                 }
     
                             } while (choice2 != 4);
